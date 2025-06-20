@@ -72,11 +72,14 @@
             const target = document.getElementById("namecard");
             var scale = 2
             domtoimage.toBlob(target, {
-                width: target.clientWidth * scale,
-                height: target.clientHeight * scale,
-                 style: {
-                  transform: 'scale('+scale+')',
-                  transformOrigin: 'top left',  
+        width: target.offsetWidth * scale,
+        height: target.offsetHeight * scale,
+        style: {
+            transform: 'scale(' + scale + ')',
+            transformOrigin: 'top left',
+            padding: '0',
+            margin: '0',
+            background: 'transparent',  
                 }})
                 .then(function(blob) {
                     window.saveAs(blob, "signature.png")
