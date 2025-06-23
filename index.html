@@ -42,7 +42,7 @@
        <div id="namecard" style="width:551px; height:170px; display: flex; flex-direction: column; position: relative; margin: 0; padding: 0; box-sizing: border-box;">
           <img src="https://qmari.github.io/EVe_Email/email_signature_2025_new.svg" style="display: block; width: 550px; height: 170px; margin: 0; padding: 0; border: 0;" />
             <div style="position: absolute; top: 0; left: 280px; width: 280px; height: 170px; display: flex; flex-direction: column; justify-content: center;">
-               <span id="card_name" style="color: white; font-size: 23px; font-family: Helvetica, sans-serif; line-height: 1.1; white-space: normal; word-break: break-word;">Joash Tan Jia Le</span>
+               <span id="card_name" style="color: white; font-size: 23px; font-family: Helvetica, sans-serif; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; display: inline-block;">
                 <span id="card_position" style="color: white; font-size: 12px; font-family: Helvetica, sans-serif;">Coffee Maker</span>
                 <span id="card_additional" style="color: white; font-size: 12px; font-family: Helvetica, sans-serif;"></span>
                 <span id="card_number" style="color: white; font-size: 11px; font-family: Helvetica, sans-serif;">+65 9123 4567</span>
@@ -60,31 +60,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        document.getElementById("generate").onclick = function () {
+       document.getElementById("generate").onclick = function () {
     const nameInput = document.getElementById("input_name").value.trim();
     const nameEl = document.getElementById("card_name");
 
-    // Set name
+    // Set the text first
     nameEl.textContent = nameInput;
 
-    // Reset font size first
-    nameEl.style.fontSize = "23px";
+    // Reset font size
+    let fontSize = 23;
+    nameEl.style.fontSize = fontSize + "px";
 
-    // Adjust font size based on length
-    if (nameInput.length > 30 && nameInput.length <= 36) {
-        nameEl.style.fontSize = "20px";
-    } else if (nameInput.length > 36 && nameInput.length <= 42) {
-        nameEl.style.fontSize = "18px";
-    } else if (nameInput.length > 42) {
-        nameEl.style.fontSize = "16px";
+    // Measure and reduce font size until it fits within container
+    const containerWidth = 250; // your fixed max width
+    const tempSpan = document.createElement("span");
+    tempSpan.style.position = "absolute";
+    tempSpan.style.visibility = "hidden";
+    tempSpan.style.whiteSpace = "nowrap";
+    tempSpan.style.fontSize = fontSize + "px";
+    tempSpan.style.fontFamily = "Helvetica, sans-serif";
+    tempSpan.textContent = nameInput;
+    document.body.appendChild(tempSpan);
+
+    while (tempSpan.offsetWidth > containerWidth && fontSize > 12) {
+        fontSize -= 1;
+        tempSpan.style.fontSize = fontSize + "px";
     }
+
+    nameEl.style.fontSize = fontSize + "px";
+    document.body.removeChild(tempSpan);
 
     // Set other values
     document.getElementById("card_position").textContent = document.getElementById("input_position").value;
     document.getElementById("card_additional").textContent = document.getElementById("input_additional").value;
     document.getElementById("card_number").textContent = document.getElementById("input_number").value;
 }
-
         document.getElementById("dl").onclick = function(){
             const target = document.getElementById("namecard");
             var scale = 2
