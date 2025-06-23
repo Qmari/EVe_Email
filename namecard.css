@@ -156,3 +156,46 @@ body {
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
 }
+.signature-container {
+  position: relative;
+  width: 650px;
+  height: 200px;
+  background-image: url('email_signature__2025_new.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 32px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 40px;
+  left: 260px;
+  width: 370px; /* restrict text width so it wraps nicely */
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  word-wrap: break-word;
+  line-height: 1.3;
+}
+
+.text-overlay span {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.text-overlay .name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.text-overlay .position,
+.text-overlay .additional,
+.text-overlay .phone {
+  font-size: 13.5px;
+}
+
+.text-overlay .company,
+.text-overlay .website {
+  font-size: 12px;
+}
