@@ -42,7 +42,7 @@
        <div id="namecard" style="width:551px; height:170px; display: flex; flex-direction: column; position: relative; margin: 0; padding: 0; box-sizing: border-box;">
           <img src="https://qmari.github.io/EVe_Email/email_signature_2025_new.svg" style="display: block; width: 550px; height: 170px; margin: 0; padding: 0; border: 0;" />
             <div style="position: absolute; top: -5px; left: 280px; width: 280px; height: 170px; display: flex; flex-direction: column; justify-content: center; padding-top: 13px">
-               <span id="card_name" style="color: white; font-size: 23px; font-family: Helvetica, sans-serif; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; display: inline-block; height: 25px;">Joash Tan Jia Le</span>
+               <span id="card_name" style="color: white; font-size: 23px; font-family: Helvetica, sans-serif; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; display: inline-block;">Joash Tan Jia Le</span>
                 <span id="card_position" style="color: white; font-size: 12px; font-family: Helvetica, sans-serif;">Coffee Maker</span>
                 <span id="card_additional" style="color: white; font-size: 12px; font-family: Helvetica, sans-serif;"></span>
                 <span id="card_number" style="color: white; font-size: 11px; font-family: Helvetica, sans-serif;">+65 9123 4567</span>
@@ -64,37 +64,34 @@
     const nameInput = document.getElementById("input_name").value.trim();
     const nameEl = document.getElementById("card_name");
 
+    // Set name and reset font size
     nameEl.textContent = nameInput;
-
-    // Auto-fit font size by testing width
-    const containerWidth = 250;
     let fontSize = 23;
+    nameEl.style.fontSize = fontSize + "px";
 
-    const tester = document.createElement("span");
-    tester.style.visibility = "hidden";
-    tester.style.whiteSpace = "nowrap";
-    tester.style.position = "absolute";
-    tester.style.fontFamily = "Helvetica, sans-serif";
-    document.body.appendChild(tester);
+    // Keep shrinking font size until it fits in one line
+    const maxWidth = 250;
+    const testEl = nameEl.cloneNode(true);
+    document.body.appendChild(testEl);
+    testEl.style.visibility = "hidden";
+    testEl.style.position = "absolute";
+    testEl.style.width = "auto";
+    testEl.style.maxWidth = "none";
 
-    tester.textContent = nameInput;
-
-    do {
-        tester.style.fontSize = fontSize + "px";
-        fontSize--;
-    } while (tester.offsetWidth > containerWidth && fontSize > 12);
+    while (testEl.offsetWidth > maxWidth && fontSize > 12) {
+        fontSize -= 1;
+        testEl.style.fontSize = fontSize + "px";
+    }
 
     nameEl.style.fontSize = fontSize + "px";
-    document.body.removeChild(tester);
+    document.body.removeChild(testEl);
 
     // Set other values
     document.getElementById("card_position").textContent = document.getElementById("input_position").value;
     document.getElementById("card_additional").textContent = document.getElementById("input_additional").value;
+    document.getElementById("card_number").textContent = "+65 " + document.getElementById("input_number").value;
+};
 
-    // Add +65 to phone number if not already present
-    const phone = document.getElementById("input_number").value.trim();
-    document.getElementById("card_number").textContent = phone.startsWith("+65") ? phone : "+65 " + phone;
-}
         document.getElementById("dl").onclick = function(){
             const target = document.getElementById("namecard");
             var scale = 2
