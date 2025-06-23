@@ -42,7 +42,7 @@
        <div id="namecard" style="width:551px; height:170px; display: flex; flex-direction: column; position: relative; margin: 0; padding: 0; box-sizing: border-box;">
           <img src="https://qmari.github.io/EVe_Email/email_signature_2025_new.svg" style="display: block; width: 550px; height: 170px; margin: 0; padding: 0; border: 0;" />
             <div style="position: absolute; top: 0; left: 280px; width: 280px; height: 170px; display: flex; flex-direction: column; justify-content: center;">
-                <span id="card_name" style="color: white; font-size: 23px; font-family: Helvetica, sans-serif;">Joash Tan Jia Le</span>
+                <span id="card_name" style="color: white; font-size: 23px; font-family: Helvetica, sans-serif; line-height: 1.1; white-space: normal; word-break: break-word;">Joash Tan Jia Le</span>
                 <span id="card_position" style="color: white; font-size: 12px; font-family: Helvetica, sans-serif;">Coffee Maker</span>
                 <span id="card_additional" style="color: white; font-size: 12px; font-family: Helvetica, sans-serif;"></span>
                 <span id="card_number" style="color: white; font-size: 11px; font-family: Helvetica, sans-serif;">+65 9123 4567</span>
@@ -63,6 +63,10 @@
         document.getElementById("generate").onclick = function(){
             console.log(document.getElementById("input_name").value)
             document.getElementById("card_name").textContent = document.getElementById("input_name").value
+            const nameEl = document.getElementById("card_name");
+if (nameEl.scrollWidth > 280) {
+    nameEl.style.fontSize = "20px";
+}
             document.getElementById("card_position").textContent = document.getElementById("input_position").value
             document.getElementById("card_additional").textContent = document.getElementById("input_additional").value
             document.getElementById("card_number").textContent = document.getElementById("input_number").value
