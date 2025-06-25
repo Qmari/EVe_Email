@@ -14,10 +14,6 @@
             <input id="input_position" type="text" name="position" placeholder="e.g. Assistant Director" class="form-field"/>
         </div>
         <div class="form-group">
-            <span>Additional:</span>
-            <input id="input_additional" type="text" name="position" placeholder="Secondary position" class="form-field"/>
-        </div>
-        <div class="form-group">
             <span>Phone:</span>
             <input id="input_number" type="text" name="phone" placeholder="e.g. 9123 4567" class="form-field"/>
         </div>
@@ -44,7 +40,6 @@
             <div style="position: absolute; top: -5px; left: 280px; width: 280px; height: 170px; display: flex; flex-direction: column; justify-content: center; padding-top: 13px">
                <span id="card_name" style="color: white; font-size: 23px; font-family: Helvetica, sans-serif; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; display: inline-block;">Joash Tan Jia Le</span>
                 <span id="card_position" style="color: white; font-size: 12px; font-family: Helvetica, sans-serif;">Coffee Maker</span>
-                <span id="card_additional" style="color: white; font-size: 12px; font-family: Helvetica, sans-serif;"></span>
                 <span id="card_number" style="color: white; font-size: 11px; font-family: Helvetica, sans-serif;">+65 9123 4567</span>
                 <br/>
                 <span style="color: white; font-size: 10px; font-family: Helvetica, sans-serif;">EV-Electric (EVe) Charging Pte Ltd</span>
@@ -88,7 +83,6 @@
 
     // Set other values
     document.getElementById("card_position").textContent = document.getElementById("input_position").value;
-    document.getElementById("card_additional").textContent = document.getElementById("input_additional").value;
     document.getElementById("card_number").textContent = "+65 " + document.getElementById("input_number").value;
 };
 
